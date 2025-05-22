@@ -1,31 +1,36 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production", // For optimized Vercel build
   entry: "./src/index.js",
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|webp)$/i,
-        type: "asset/resource",
+        test: /\.(png|jpe?g|gif|webp|hdr)$/i,
+        type: "asset/resource", // includes .hdr support
       },
     ],
   },
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"), // this is where bundle.js is written on disk
-    publicPath: "/", // important for dev server to serve from root
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/", // ensure correct path on Vercel
     clean: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // you'll need this HTML file
+    }),
+  ],
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"), // serves static files like index.html
-      publicPath: "/", // URL prefix
+      directory: path.resolve(__dirname, "public"),
+      publicPath: "/",
     },
     compress: true,
     port: 8080,
     hot: true,
     open: true,
   },
-  // ...rest of config
 };
