@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production", // For optimized Vercel build
@@ -24,7 +25,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "/public/static", to: "static" }, // copy `static` folder to output folder
+        { from: path.resolve(__dirname, "public/static"), to: "static" },
       ],
     }),
   ],
