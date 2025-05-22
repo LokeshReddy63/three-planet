@@ -1,18 +1,9 @@
 {
-    "builds": [
+    "cleanUrls": true,
+    "rewrites": [
         {
-            "src": "webpack.config.js",
-            "use": "@vercel/static-build"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/static/:match*",
+            "destination": "/public/static/:match*"
         }
     ]
 }
