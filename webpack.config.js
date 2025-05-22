@@ -22,6 +22,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html", // you'll need this HTML file
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: "/public/static", to: "static" }, // copy `static` folder to output folder
+      ],
+    }),
   ],
   devServer: {
     static: {
